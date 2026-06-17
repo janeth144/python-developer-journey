@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h2>Welcome to Cloud Storage System</h2>
+
+<p>Karibu, umefanikiwa kuingia mfumo.</p>
+
+<hr>
+
+<h3>Upload File</h3>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+
+<hr>
+
+<h3>Your Files</h3>
+
+<ul>
+    {% for file in files %}
+        <li>
+            <a href="{{ file.file.url }}" download>
+                {{ file.file.name }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No files uploaded yet</li>
+    {% endfor %}
+</ul>
+
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>
